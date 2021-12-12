@@ -242,7 +242,7 @@ compile_libs(State, [App | Apps], AddToPath) ->
     Profile = profile(Env),
     case {ec_file:exists(filename:join(AppDir, "mix.exs")), ec_file:exists(filename:join(AppDir, "rebar.config"))} of
         {true, false} -> 
-            sh(Profile ++ Mix ++ "deps.get", [{cd, AppDir}, {use_stdout, true}]),
+            sh(Profile ++ Mix ++ "local.hex --force", [{cd, AppDir}, {use_stdout, true}]),
             sh(Profile ++ Mix ++ "compile", [{cd, AppDir}, {use_stdout, true}]),
             LibsDir = libs_dir(AppDir, Env),
             {ok, Libs} = file:list_dir_all(LibsDir),
