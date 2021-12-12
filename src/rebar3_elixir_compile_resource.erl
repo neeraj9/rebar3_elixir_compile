@@ -90,6 +90,9 @@ fetch({elixir, Name_, Vsn_}, CDN) ->
                 {ok, Binary, _} ->
                     {ok, Contents} = extract(Binary),
                     ok = erl_tar:extract({binary, Contents}, [{cwd, Dir}, compressed]);
+                {ok, {200, _RespHeaders, Binary}} ->
+                    {ok, Contents} = extract(Binary),
+                    ok = erl_tar:extract({binary, Contents}, [{cwd, Dir}, compressed]);
                 _ ->
                     rebar_api:console("Error: Unable to fetch package ~p ~p~n", [Name, Vsn])
             end;
