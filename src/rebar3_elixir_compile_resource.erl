@@ -71,7 +71,8 @@ fetch_and_compile(State, Dir, {elixir, Name, _Vsn} = Pkg) ->
 cdn(State) ->
   Opts = rebar_state:get(State, elixir_opts, []),
   CDNSite = proplists:get_value(cdn, Opts, ?DEFAULT_CDN_SITE),
-  CDNSite %% ++ ?CDN_TARBALL_LOCATION.
+  % CDNSite ++ ?CDN_TARBALL_LOCATION.
+  CDNSite.
 
 fetch({elixir, Name_, Vsn_}, CDN) ->
     Dir = filename:join([filename:absname("_elixir_build"), Name_]),
